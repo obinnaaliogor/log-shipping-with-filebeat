@@ -1,8 +1,7 @@
+A simple logging for a specific application:
 
-```markdown
-# Simple Logging for a Specific Application
 
-## Step 1: Create a Filebeat Configuration
+### Step 1: Create a Filebeat Configuration
 
 Create a Filebeat configuration file (e.g., `filebeat.yml`) with the following content:
 
@@ -20,8 +19,8 @@ output.s3:
   endpoint: your-s3-endpoint  # Optional, if you're using a non-AWS S3-compatible service
 ```
 
-## Step 2: Create a Kubernetes Secret
-[Reference: Managing Secrets Using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/)
+### Step 2: Create a Kubernetes Secret
+Reference: https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/
 
 Create a Kubernetes Secret to store your AWS access keys and secret access keys using the following `kubectl` command:
 
@@ -31,8 +30,8 @@ kubectl create secret generic aws-credentials \
   --from-literal=AWS_SECRET_ACCESS_KEY=your-secret-access-key
 ```
 
-## Step 3: Create a Kubernetes Pod
-[Reference: Kubernetes Logging Concepts](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
+### Step 3: Create a Kubernetes Pod
+Reference: https://kubernetes.io/docs/concepts/cluster-administration/logging/
 
 Modify your Kubernetes Pod manifest (e.g., `pod.yaml`) to include Filebeat as a sidecar container:
 
@@ -84,7 +83,5 @@ spec:
     configMap:
       name: filebeat-config-map  # Create a ConfigMap with your Filebeat configuration
 ```
-
-**Important:**
+Important:
 These steps and file snippets should help you set up log shipping with Filebeat and AWS S3 in your Kubernetes environment while maintaining security with AWS credentials stored in a Kubernetes Secret. Make sure to replace placeholder values with your actual configurations and values.
-```
